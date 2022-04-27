@@ -1,5 +1,7 @@
-const port = 3000;
+require('dotenv').config();
+
+const PORT = process.env.PORT || 5000;
 
 module.exports = {
-  port: port,
+  PORT,
 };

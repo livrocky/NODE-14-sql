@@ -1,10 +1,17 @@
 const express = require('express');
-const cors = require('cors');
-const { port } = require('./config');
+const morgan = require('morgan');
+// const cors = require('cors');
+const { PORT } = require('./config');
 
 const app = express();
-app.listen(port, () => console.log('express is online', port));
+
+// Middleware
+app.use(morgan('dev'));
+
+console.log('Yellow');
 
 app.get('/', (request, response) => {
   response.json('Hello World');
 });
+
+app.listen(PORT, () => console.log('express is online', PORT));
