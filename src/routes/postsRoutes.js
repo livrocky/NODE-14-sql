@@ -22,6 +22,25 @@ postRoutes.get('/first-posts', async (req, res) => {
 });
 // GET /api/first-posts - parsiusti pirmus 2 posts (LIMIT)
 
+/// COPIED (dinamimnis)///////////////////////////////
+
+postRoutes.get('/posts/name/:name', async (req, res) => {
+  let conn;
+  try {
+    const { name } = req.params;
+    console.log('name===', name);
+    conn = await mysql.createConnection(dbConfig);
+    const sql = `SELECT * FROM posts WHERE author = '${name}'`;
+    const [rows] = await conn.query(sql);
+    res.json(rows);
+  } catch (error) {
+    console.log('error in getting posts by James', error);
+    res.status(500);
+  } finally {
+    await conn?.end();
+  }
+});
+
 module.exports = {
   postRoutes,
 };
