@@ -30,8 +30,12 @@ postRoutes.get('/posts/name/:name', async (req, res) => {
     const { name } = req.params;
     console.log('name===', name);
     conn = await mysql.createConnection(dbConfig);
-    const sql = `SELECT * FROM posts WHERE author = '${name}'`;
-    const [rows] = await conn.query(sql);
+    // const sql = `SELECT * FROM posts WHERE author = '${name}'`;
+    // const [rows] = await conn.query(sql);
+
+    // reikia neautralizuoti vartotojo ivesties duomenis
+    const sql = 'SELECT * FROM posts WHERE author = ?';
+    const [rows] = await conn.execute(sql, [name]);
     res.json(rows);
   } catch (error) {
     console.log('error in getting posts by James', error);
