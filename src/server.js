@@ -3,18 +3,10 @@ const morgan = require('morgan');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
 // const cors = require('cors');
-const { PORT } = require('./config');
+const { PORT, dbConfig } = require('./config');
+const { postRoutes } = require('./routes/postsRoutes');
 
 const app = express();
-
-// db config
-const dbConfig = {
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'type8_first_db',
-  port: '8889',
-};
 
 // Middleware
 app.use(morgan('dev'));
@@ -42,5 +34,7 @@ app.get('/api/posts', async (req, res) => {
     // connection?.close();
   }
 });
+
+app.use('/api/', postRoutes);
 
 app.listen(PORT, () => console.log('express is online', PORT));
