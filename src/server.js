@@ -8,10 +8,10 @@ const app = express();
 // Middleware
 app.use(morgan('dev'));
 
-console.log('Yellow');
+// home route
 
 app.get('/', (request, response) => {
-  response.json('Hello World');
+  response.json('Hello Mysql');
 });
 
 app.listen(PORT, () => console.log('express is online', PORT));
