@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 </head>
 
@@ -13,17 +13,47 @@
 
     <ol id="post-list"></ol>
 
+    <button id="del-11">Delete 11</button>
+
     <script>
         async function getPosts() {
-            const resp = await fetch('http://localhost:3000/api/posts')
+            const resp = await fetch('http://localhost:3000/api/posts');
             const postsArr = await resp.json();
-            console.log('postsArr===', postsArr);
+            console.log('postsArr ===', postsArr);
+            makeList(postsArr, 'post-list');
         }
-        getPosts()
+        getPosts();
 
         function makeList(arr, destId) {
-
+            const dest = document.getElementById(destId);
+            dest.innerHTML = '';
+            arr.forEach((p) => {
+                const li = document.createElement('li');
+                li.textContent = `authtor:${p.author}, title: ${p.title} `;
+                const btnEl = document.createElement('button');
+                btnEl.textContent = 'delete me';
+                li.appendChild(btnEl);
+                dest.append(li);
+            });
         }
+
+        // delete function
+        async function deletePost(delId) {
+            const resp = await fetch(`http://localhost:3000/api/posts/${delId}`, {
+                method: 'DELETE',
+            });
+            console.log('resp ===', resp);
+            if (resp.ok) {
+                getPosts();
+            }
+            console.log('data ===', await resp.json());
+        }
+
+        const btn11El = document.getElementById('del-11');
+        btn11El.addEventListener('click', () => {
+            console.log('deleting');
+            deletePost(12);
+        });
     </script>
 </body>
 

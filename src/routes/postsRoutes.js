@@ -142,7 +142,7 @@ postRoutes.delete('/posts/:postId', async (req, res) => {
       res.json('delete ok');
       return;
     }
-    throw new Error('sometnig wrong in deleteRezult.affectedRows');
+    throw new Error('something wrong in deleteRezult.affectedRows');
   } catch (error) {
     console.log('error DELETE posts', error);
     res.sendStatus(500);
