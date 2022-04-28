@@ -10,6 +10,9 @@
 
 <body>
     <h1>Posts</h1>
+
+    <ol id="post-list"></ol>
+
     <script>
         async function getPosts() {
             const resp = await fetch('http://localhost:3000/api/posts')
@@ -17,6 +20,10 @@
             console.log('postsArr===', postsArr);
         }
         getPosts()
+
+        function makeList(arr, destId) {
+
+        }
     </script>
 </body>
 
