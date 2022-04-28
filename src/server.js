@@ -11,6 +11,8 @@ const app = express();
 // Middleware
 app.use(morgan('dev'));
 app.use(cors('cors'));
+// kad express galetu gauti json siustus duomenis
+app.use(express.json());
 
 // home route
 
