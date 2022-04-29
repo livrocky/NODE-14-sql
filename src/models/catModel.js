@@ -7,7 +7,10 @@ async function createTableDB() {
   let conn;
   try {
     conn = await mysql.createConnection(dbConfig);
-    const sql = 'SELECT * FROM posts';
+    const sql = `CREATE TABLE type8_first_db.categories ( 
+        id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+        title VARCHAR(255) NOT NULL , 
+        craeted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (id)) ENGINE = InnoDB`;
     console.log('pries uzklausa');
     const [result] = await conn.query(sql);
     console.log('po uzklausos');
@@ -21,6 +24,26 @@ async function createTableDB() {
   }
 }
 
+async function insertCatDB(title) {
+  console.log('insertCatDB model ran');
+  let conn;
+  try {
+    conn = await mysql.createConnection(dbConfig);
+    const sql = `
+    INSERT INTO categories (title)
+VALUES (?)`;
+    const [result] = await conn.execute(sql, [title]);
+    return result;
+  } catch (error) {
+    console.log('error createTableDB', error);
+    // return false
+    throw error;
+  } finally {
+    conn?.end();
+  }
+}
+
 module.exports = {
   createTableDB,
+  insertCatDB,
 };
