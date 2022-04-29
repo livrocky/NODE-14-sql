@@ -4,11 +4,11 @@ const PORT = process.env.PORT || 5000;
 
 // db config
 const dbConfig = {
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'type8_first_db',
-  port: '8889',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_DATABASE,
+  port: process.env.DB_PORT,
 };
 
 module.exports = {

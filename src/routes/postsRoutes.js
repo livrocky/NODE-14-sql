@@ -7,6 +7,8 @@ const postRoutes = express.Router();
 // routeri importuoti i server js
 // sukurti tuscia route ir isitikinti kad veikia
 // GET /api/first-posts - parsiusti pirmus 2 posts (LIMIT)
+
+// postRoutes.get('/posts', postsController.index);
 postRoutes.get('/posts', async (req, res) => {
   let conn;
   try {
