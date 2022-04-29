@@ -1,13 +1,7 @@
 const express = require('express');
+const { createTable } = require('../controller/catController');
 
 const catRoutes = express.Router();
-
-async function createTableDB() {}
-
-async function createTable(req, res) {
-  const success = createTableDB();
-  if (success) res.json('table created');
-}
 
 // routes
 catRoutes.post('/categories/create', createTable);
